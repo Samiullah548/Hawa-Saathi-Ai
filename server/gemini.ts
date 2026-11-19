@@ -7,6 +7,10 @@ import {
   generateDeterministicChatResponse,
 } from './fallbackEngine';
 
+function getGeminiModel(): string {
+  return process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+}
+
 function getGeminiClient(customKey?: string): GoogleGenAI | null {
   const apiKey = customKey || process.env.GEMINI_API_KEY;
   if (!apiKey || apiKey.trim() === '' || apiKey === 'your_gemini_api_key_here') {
@@ -80,7 +84,7 @@ Return ONLY a valid JSON object matching this schema:
 
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
+      model: getGeminiModel(),
       contents: prompt,
       config: {
         responseMimeType: 'application/json',
@@ -154,7 +158,7 @@ Return ONLY a valid JSON object matching this schema:
 
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
+      model: getGeminiModel(),
       contents: prompt,
       config: {
         responseMimeType: 'application/json',
@@ -195,7 +199,7 @@ Never invent fake live readings. If live data is unavailable, state so honestly.
 
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
+      model: getGeminiModel(),
       contents: [
         { role: 'user', parts: [{ text: `${systemContext}\n\nUser Question: ${message}` }] },
       ],
@@ -207,3 +211,4 @@ Never invent fake live readings. If live data is unavailable, state so honestly.
     return generateDeterministicChatResponse(message, cityContext);
   }
 }
+

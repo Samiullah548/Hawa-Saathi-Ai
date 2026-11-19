@@ -29,3 +29,4 @@ describe('Commute Emissions Calculator', () => {
     expect(carpool.currentTripKgCO2).toBeCloseTo(solo.currentTripKgCO2 / 2, 1);
   });
 });
+

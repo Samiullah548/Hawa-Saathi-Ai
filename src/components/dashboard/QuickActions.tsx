@@ -78,3 +78,4 @@ export const QuickActions: React.FC<QuickActionsProps> = ({ onNavigate }) => {
     </div>
   );
 };
+

@@ -390,3 +390,4 @@ export const AISafetyPage: React.FC<AISafetyPageProps> = ({ data, preferences })
     </div>
   );
 };
+

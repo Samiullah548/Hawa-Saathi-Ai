@@ -260,3 +260,4 @@ export const ForecastPage: React.FC<ForecastPageProps> = ({ data }) => {
     </div>
   );
 };
+

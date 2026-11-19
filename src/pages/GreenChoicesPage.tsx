@@ -303,3 +303,4 @@ export const GreenChoicesPage: React.FC = () => {
     </div>
   );
 };
+

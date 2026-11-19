@@ -112,3 +112,4 @@ export async function sendAIChatMessage(
     return generateDeterministicChatResponse(message, cityContext);
   }
 }
+

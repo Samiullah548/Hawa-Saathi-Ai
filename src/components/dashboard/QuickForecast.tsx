@@ -120,3 +120,4 @@ export const QuickForecast: React.FC<QuickForecastProps> = ({
     </div>
   );
 };
+

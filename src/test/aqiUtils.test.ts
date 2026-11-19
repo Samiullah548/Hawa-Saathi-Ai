@@ -37,3 +37,4 @@ describe('AQI Utilities', () => {
     expect(hazardousExp.healthRisk).toContain('Emergency conditions');
   });
 });
+

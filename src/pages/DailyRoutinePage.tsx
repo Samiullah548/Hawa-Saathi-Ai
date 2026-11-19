@@ -315,3 +315,4 @@ Key Takeaway: ${routinePlan.keySafetyTakeaway}`;
     </div>
   );
 };
+

@@ -56,3 +56,4 @@ describe('Deterministic Expert Fallback Engine', () => {
     expect(response).toContain('Avoid Outdoor Exercise');
   });
 });
+

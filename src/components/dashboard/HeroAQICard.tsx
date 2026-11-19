@@ -118,3 +118,4 @@ export const HeroAQICard: React.FC<HeroAQICardProps> = ({
     </div>
   );
 };
+

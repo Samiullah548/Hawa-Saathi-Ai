@@ -44,3 +44,4 @@ describe('Smog Survival Score Algorithm', () => {
     expect(result.tier).toBe('Moderate Protection');
   });
 });
+

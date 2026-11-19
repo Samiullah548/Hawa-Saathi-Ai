@@ -286,3 +286,4 @@ export const AIChatbotPage: React.FC<AIChatbotPageProps> = ({ data, preferences 
     </div>
   );
 };
+

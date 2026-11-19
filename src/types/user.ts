@@ -47,3 +47,4 @@ export interface ChecklistItem {
   isCompleted: boolean;
   frequency: 'daily' | 'weekly' | 'seasonal';
 }
+

@@ -133,3 +133,4 @@ export function findBestOutdoorWindow(
     daytimeSummary: `Cleanest window expected around ${best.startHour} - ${best.endHour} (AQI ~${best.avgAqi}). Avoid ${worstCandidate.startHour} - ${worstCandidate.endHour} when smog peaks at ~${worstCandidate.avgAqi}.`,
   };
 }
+

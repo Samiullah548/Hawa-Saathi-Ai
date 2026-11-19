@@ -210,3 +210,4 @@ export function clearAllUserData(): void {
   localStorage.removeItem(CHAT_HISTORY_KEY);
   localStorage.removeItem(COMMUTE_HISTORY_KEY);
 }
+

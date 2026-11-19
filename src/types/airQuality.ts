@@ -83,3 +83,4 @@ export interface AirQualityCombinedData {
   lastUpdated: string;
   isLive: boolean;
 }
+

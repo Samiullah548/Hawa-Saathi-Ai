@@ -21,6 +21,7 @@ app.get('/api/health', (_req: Request, res: Response) => {
     status: 'healthy',
     service: 'HawaSaathi AI Backend Service',
     geminiConfigured: Boolean(process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY !== 'your_gemini_api_key_here'),
+    geminiModel: process.env.GEMINI_MODEL || 'gemini-2.5-flash',
     timestamp: new Date().toISOString(),
   });
 });
@@ -68,3 +69,4 @@ app.post('/api/ai/chat', async (req: Request, res: Response) => {
 app.listen(PORT, () => {
   console.log(`🌿 HawaSaathi AI Backend Server running at http://localhost:${PORT}`);
 });
+

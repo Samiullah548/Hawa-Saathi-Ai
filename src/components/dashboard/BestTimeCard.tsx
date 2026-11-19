@@ -104,3 +104,4 @@ export const BestTimeCard: React.FC<BestTimeCardProps> = ({
     </div>
   );
 };
+

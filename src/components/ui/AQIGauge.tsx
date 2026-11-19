@@ -118,3 +118,4 @@ export const AQIGauge: React.FC<AQIGaugeProps> = ({
     </div>
   );
 };
+

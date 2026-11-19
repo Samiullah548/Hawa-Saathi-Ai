@@ -305,3 +305,4 @@ export const IndoorAirCarePage: React.FC<IndoorAirCarePageProps> = ({ data }) =>
     </div>
   );
 };
+

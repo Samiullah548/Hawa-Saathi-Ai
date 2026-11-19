@@ -233,3 +233,4 @@ export const SmogScoreCard: React.FC<SmogScoreCardProps> = ({
     </div>
   );
 };
+

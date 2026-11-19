@@ -255,3 +255,4 @@ export async function searchCitiesGeocoding(query: string): Promise<CityLocation
     return localMatches;
   }
 }
+
