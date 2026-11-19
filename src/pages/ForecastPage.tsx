@@ -28,7 +28,17 @@ export const ForecastPage: React.FC<ForecastPageProps> = ({ data }) => {
 
   const hourlySlice = timeRange === '24h' ? hourly.slice(0, 24) : hourly;
 
-  const CustomTooltip = ({ active, payload }: any) => {
+  interface HourlyTooltipProps {
+    active?: boolean;
+    payload?: Array<{ payload: HourlyForecastPoint }>;
+  }
+
+  interface DailyTooltipProps {
+    active?: boolean;
+    payload?: Array<{ payload: DailyForecastPoint }>;
+  }
+
+  const CustomTooltip: React.FC<HourlyTooltipProps> = ({ active, payload }) => {
     if (active && payload && payload.length) {
       const pt = payload[0].payload as HourlyForecastPoint;
       const color = getAQIColor(pt.category);
@@ -59,7 +69,7 @@ export const ForecastPage: React.FC<ForecastPageProps> = ({ data }) => {
     return null;
   };
 
-  const DailyTooltip = ({ active, payload }: any) => {
+  const DailyTooltip: React.FC<DailyTooltipProps> = ({ active, payload }) => {
     if (active && payload && payload.length) {
       const pt = payload[0].payload as DailyForecastPoint;
       const color = getAQIColor(pt.category);
@@ -171,7 +181,11 @@ export const ForecastPage: React.FC<ForecastPageProps> = ({ data }) => {
           </div>
         </div>
 
-        <div className="h-72 w-full pt-4">
+        <div
+          className="h-72 w-full pt-4"
+          role="region"
+          aria-label={`Hourly ${selectedMetric.toUpperCase()} trend chart for ${location.name} over next ${timeRange}`}
+        >
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={hourlySlice} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
               <defs>
@@ -221,7 +235,11 @@ export const ForecastPage: React.FC<ForecastPageProps> = ({ data }) => {
           </p>
         </div>
 
-        <div className="h-64 w-full pt-4">
+        <div
+          className="h-64 w-full pt-4"
+          role="region"
+          aria-label={`7-day daily AQI projections and smog ranges chart for ${location.name}`}
+        >
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={daily} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />

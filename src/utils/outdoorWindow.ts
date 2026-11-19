@@ -21,6 +21,15 @@ export interface BestWindowResult {
   daytimeSummary: string;
 }
 
+/**
+ * Algorithmic outdoor window identifier.
+ * Analyzes rolling 2-hour daylight windows (6 AM - 9 PM) across Open-Meteo hourly projections
+ * to find the lowest particulate exposure window, accounting for nocturnal & morning smog inversions.
+ * 
+ * @param hourlyData - 24-48 hour hourly forecast series from atmospheric models
+ * @param currentAqi - Current real-time ambient AQI
+ * @returns BestWindowResult detailing the best window, worst peak, and comparative advisory
+ */
 export function findBestOutdoorWindow(
   hourlyData: HourlyForecastPoint[],
   currentAqi: number

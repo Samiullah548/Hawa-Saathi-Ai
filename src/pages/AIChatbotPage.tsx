@@ -8,15 +8,11 @@ import {
   saveChatHistory,
 } from '../services/storage';
 import {
-  MessageSquare,
   Sparkles,
   Send,
   Trash2,
   Bot,
   User,
-  ShieldAlert,
-  Wind,
-  AlertTriangle,
   Copy,
   Check,
 } from 'lucide-react';
@@ -105,7 +101,7 @@ export const AIChatbotPage: React.FC<AIChatbotPageProps> = ({ data, preferences 
       const finalMessages = [...newMessages, assistantMessage];
       setMessages(finalMessages);
       saveChatHistory(finalMessages);
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('Chat error:', err);
     } finally {
       setIsLoading(false);

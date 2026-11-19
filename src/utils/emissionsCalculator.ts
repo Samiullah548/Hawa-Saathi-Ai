@@ -119,6 +119,15 @@ export interface CommuteCalculationResult {
   explanation: string;
 }
 
+/**
+ * Calculates per-trip and annual commuting CO2 emissions and particulate savings.
+ * Accounts for vehicle occupancy, fuel type, and Indian urban transport emission factors (CPCB/ARAI benchmarks).
+ * 
+ * @param modeId - Identifier of the transport mode (e.g., 'petrol_car', 'delhi_metro', 'ev_scooter')
+ * @param roundTripKm - Total round-trip distance traveled per day
+ * @param carpoolOccupancy - Number of passengers sharing the trip (for cars)
+ * @returns Object with grams CO2 per trip, kg CO2 per year, trees needed to offset, and comparison against baseline
+ */
 export function calculateCommuteEmissions(
   oneWayDistanceKm: number,
   tripsPerDay: number,

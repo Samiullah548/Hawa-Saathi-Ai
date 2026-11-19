@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { UserPreferences, HouseholdProfileType, ActivityType } from '../types/user';
 import { CityLocation } from '../types/airQuality';
 import { POPULAR_INDIAN_CITIES } from '../services/openMeteo';
+import { ACTIVITIES, PROFILES } from '../constants';
 import {
   clearAllUserData,
   savePreferences,
@@ -13,15 +14,11 @@ import {
 import {
   Settings,
   User,
-  MapPin,
   Bell,
   Key,
   Trash2,
   Check,
-  ShieldCheck,
   Activity,
-  Layers,
-  Info,
 } from 'lucide-react';
 
 interface SettingsPageProps {
@@ -29,24 +26,6 @@ interface SettingsPageProps {
   onUpdatePreferences: (prefs: UserPreferences) => void;
   onSelectCity: (city: CityLocation) => void;
 }
-
-const ALL_ACTIVITIES: ActivityType[] = [
-  'Morning Walk / Jog',
-  'Cycling',
-  'Outdoor Work / Labor',
-  'Office Commute',
-  'School / Playground',
-  'Indoor Fitness',
-  'General Errand',
-];
-
-const PROFILES: HouseholdProfileType[] = [
-  'General Adult',
-  'Child',
-  'Elderly Person',
-  'Sensitive Individual',
-  'Outdoor Worker',
-];
 
 export const SettingsPage: React.FC<SettingsPageProps> = ({
   preferences,
@@ -287,7 +266,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-            {ALL_ACTIVITIES.map((act) => {
+            {ACTIVITIES.map((act) => {
               const isChecked = prefs.primaryActivities.includes(act);
               return (
                 <button

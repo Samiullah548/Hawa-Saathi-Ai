@@ -232,7 +232,15 @@ export async function searchCitiesGeocoding(query: string): Promise<CityLocation
       return localMatches;
     }
 
-    const apiMatches: CityLocation[] = data.results.map((r: any) => ({
+    interface OpenMeteoGeocodingItem {
+      name: string;
+      admin1?: string;
+      country?: string;
+      latitude: number;
+      longitude: number;
+    }
+
+    const apiMatches: CityLocation[] = data.results.map((r: OpenMeteoGeocodingItem) => ({
       name: r.name,
       state: r.admin1 || r.country,
       country: r.country || 'India',

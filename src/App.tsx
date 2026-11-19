@@ -64,7 +64,7 @@ export const App: React.FC = () => {
           `Air quality is ${data.current.aqiCategory}. Wear an N95 mask outside and seal bedroom windows.`
         );
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Failed to load air quality data:', err);
       setError('Live atmosphere data is temporarily unreachable. Please check your internet connection.');
     } finally {
@@ -120,6 +120,14 @@ export const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-row">
+      {/* Skip to Main Content Link for Keyboard Users */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-emerald-600 focus:text-white focus:rounded-xl focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-emerald-400"
+      >
+        Skip to main content
+      </a>
+
       {/* Sidebar for Desktop */}
       <Sidebar
         currentPage={currentPage}
@@ -142,7 +150,7 @@ export const App: React.FC = () => {
           onToggleNotifications={handleToggleNotifications}
         />
 
-        <main className="flex-1 p-4 md:p-8 max-w-7xl mx-auto w-full">
+        <main id="main-content" className="flex-1 p-4 md:p-8 max-w-7xl mx-auto w-full" tabIndex={-1}>
           {error && (
             <div className="mb-6 p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 flex items-center justify-between">
               <div className="flex items-center space-x-3 text-xs md:text-sm">

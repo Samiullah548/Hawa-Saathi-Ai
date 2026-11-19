@@ -6,12 +6,6 @@ import {
   MessageSquare,
   Menu,
   X,
-  ShieldCheck,
-  CalendarClock,
-  Home,
-  Leaf,
-  TrendingUp,
-  Settings,
 } from 'lucide-react';
 import { NavPage, NAV_ITEMS } from './Sidebar';
 
@@ -31,9 +25,14 @@ export const MobileNav: React.FC<MobileNavProps> = ({
   return (
     <>
       {/* Mobile Bottom Navigation Bar */}
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/80 px-2 py-1 flex items-center justify-around shadow-lg">
+      <nav
+        className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/80 px-2 py-1 flex items-center justify-around shadow-lg"
+        aria-label="Mobile Bottom Navigation"
+      >
         <button
           onClick={() => onNavigate('dashboard')}
+          aria-current={currentPage === 'dashboard' ? 'page' : undefined}
+          aria-label="Navigate to Overview"
           className={`flex flex-col items-center py-1.5 px-3 rounded-xl transition ${
             currentPage === 'dashboard' ? 'text-emerald-600 font-bold' : 'text-slate-500'
           }`}
@@ -44,6 +43,8 @@ export const MobileNav: React.FC<MobileNavProps> = ({
 
         <button
           onClick={() => onNavigate('live-aqi')}
+          aria-current={currentPage === 'live-aqi' ? 'page' : undefined}
+          aria-label="Navigate to Live AQI"
           className={`flex flex-col items-center py-1.5 px-3 rounded-xl transition ${
             currentPage === 'live-aqi' ? 'text-emerald-600 font-bold' : 'text-slate-500'
           }`}
@@ -54,6 +55,8 @@ export const MobileNav: React.FC<MobileNavProps> = ({
 
         <button
           onClick={() => onNavigate('ai-safety')}
+          aria-current={currentPage === 'ai-safety' ? 'page' : undefined}
+          aria-label="Navigate to AI Safety"
           className={`flex flex-col items-center py-1.5 px-3 rounded-xl transition ${
             currentPage === 'ai-safety' ? 'text-emerald-600 font-bold' : 'text-slate-500'
           }`}
@@ -64,6 +67,8 @@ export const MobileNav: React.FC<MobileNavProps> = ({
 
         <button
           onClick={() => onNavigate('ai-chat')}
+          aria-current={currentPage === 'ai-chat' ? 'page' : undefined}
+          aria-label="Navigate to Chatbot"
           className={`flex flex-col items-center py-1.5 px-3 rounded-xl transition ${
             currentPage === 'ai-chat' ? 'text-emerald-600 font-bold' : 'text-slate-500'
           }`}
@@ -74,6 +79,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({
 
         <button
           onClick={onCloseDrawer}
+          aria-label="Open Full Navigation Menu Drawer"
           className="flex flex-col items-center py-1.5 px-3 rounded-xl text-slate-500 hover:text-slate-900"
         >
           <Menu className="w-5 h-5" />

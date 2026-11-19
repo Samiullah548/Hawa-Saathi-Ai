@@ -61,7 +61,11 @@ export const StatCard: React.FC<StatCardProps> = ({
   }
 
   return (
-    <div className="dashboard-card p-5 flex flex-col justify-between hover:border-slate-300">
+    <div
+      className="dashboard-card p-5 flex flex-col justify-between hover:border-slate-300"
+      role="region"
+      aria-label={`${title} reading: ${value} ${unit}`}
+    >
       <div>
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center space-x-2">

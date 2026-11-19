@@ -1,5 +1,10 @@
 import { AQICategory, PollutantInfo } from '../types/airQuality';
 
+/**
+ * Maps a numeric US Air Quality Index (0-500+) to standard EPA/CPCB health risk categories.
+ * @param aqi - Numeric AQI value (typically 0-500)
+ * @returns AQICategory string corresponding to EPA thresholds
+ */
 export function getAQICategory(aqi: number): AQICategory {
   if (aqi <= 50) return 'Good';
   if (aqi <= 100) return 'Moderate';
@@ -9,6 +14,11 @@ export function getAQICategory(aqi: number): AQICategory {
   return 'Hazardous';
 }
 
+/**
+ * Returns Tailwind CSS classes, hex codes, and badge styles for a given AQI category.
+ * @param category - Standard AQICategory name
+ * @returns Object with theme-compliant color variables and classes
+ */
 export function getAQIColor(category: AQICategory): {
   bg: string;
   text: string;
@@ -76,6 +86,11 @@ export function getAQIColor(category: AQICategory): {
   }
 }
 
+/**
+ * Provides comprehensive plain-language health explanations, clinical warnings, and outdoor advice.
+ * @param category - Standard AQICategory name
+ * @returns Object with summary, clinical risks, outdoor activity guidance, and mask necessity
+ */
 export function getAQIExplanation(category: AQICategory): {
   summary: string;
   healthRisk: string;

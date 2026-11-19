@@ -23,7 +23,12 @@ export const QuickForecast: React.FC<QuickForecastProps> = ({
   // Use first 16 hours for a crisp dashboard preview
   const data = hourly.slice(0, 16);
 
-  const CustomTooltip = ({ active, payload }: any) => {
+  interface QuickTooltipProps {
+    active?: boolean;
+    payload?: Array<{ payload: HourlyForecastPoint }>;
+  }
+
+  const CustomTooltip: React.FC<QuickTooltipProps> = ({ active, payload }) => {
     if (active && payload && payload.length) {
       const pt = payload[0].payload as HourlyForecastPoint;
       const color = getAQIColor(pt.category);

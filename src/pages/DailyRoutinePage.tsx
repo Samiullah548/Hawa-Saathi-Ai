@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { AirQualityCombinedData } from '../types/airQuality';
 import { UserPreferences, HouseholdProfileType, ActivityType, TimeOfDay } from '../types/user';
 import { AIRoutinePlan } from '../types/ai';
 import { fetchAIRoutinePlan } from '../services/geminiClient';
+import { ACTIVITIES, PROFILES, TIME_SLOTS } from '../constants';
 import {
   CalendarClock,
   Sparkles,
@@ -11,38 +12,15 @@ import {
   Sunset,
   Moon,
   Clock,
-  ShieldAlert,
-  ArrowRight,
   Printer,
   Copy,
   Check,
-  Info,
 } from 'lucide-react';
 
 interface DailyRoutinePageProps {
   data: AirQualityCombinedData;
   preferences: UserPreferences;
 }
-
-const ACTIVITIES: ActivityType[] = [
-  'Morning Walk / Jog',
-  'Cycling',
-  'Outdoor Work / Labor',
-  'Office Commute',
-  'School / Playground',
-  'Indoor Fitness',
-  'General Errand',
-];
-
-const PROFILES: HouseholdProfileType[] = [
-  'General Adult',
-  'Child',
-  'Elderly Person',
-  'Sensitive Individual',
-  'Outdoor Worker',
-];
-
-const TIME_OPTIONS: TimeOfDay[] = ['Morning', 'Afternoon', 'Evening', 'Night'];
 
 export const DailyRoutinePage: React.FC<DailyRoutinePageProps> = ({
   data,
@@ -56,7 +34,7 @@ export const DailyRoutinePage: React.FC<DailyRoutinePageProps> = ({
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
 
-  const generatePlan = async () => {
+  const generatePlan = useCallback(async () => {
     setIsLoading(true);
     try {
       const plan = await fetchAIRoutinePlan(
@@ -70,16 +48,16 @@ export const DailyRoutinePage: React.FC<DailyRoutinePageProps> = ({
         preferences.customGeminiApiKey
       );
       setRoutinePlan(plan);
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('Failed to generate daily routine plan:', err);
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [data.location.name, activity, preferredTime, profile, data.current.aqi, preferences.customGeminiApiKey]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     generatePlan();
-  }, [data.location.name, activity, preferredTime, profile]);
+  }, [generatePlan]);
 
   const handleCopy = () => {
     if (!routinePlan) return;
@@ -177,7 +155,7 @@ Key Takeaway: ${routinePlan.keySafetyTakeaway}`;
               onChange={(e) => setPreferredTime(e.target.value as TimeOfDay)}
               className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-800 text-sm font-semibold outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
             >
-              {TIME_OPTIONS.map((t) => (
+              {TIME_SLOTS.map((t) => (
                 <option key={t} value={t}>
                   {t}
                 </option>

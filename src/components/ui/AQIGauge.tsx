@@ -27,7 +27,11 @@ export const AQIGauge: React.FC<AQIGaugeProps> = ({
   const strokeDashoffset = circumference * (1 - ratio);
 
   return (
-    <div className="flex flex-col items-center justify-center relative">
+    <div
+      className="flex flex-col items-center justify-center relative"
+      role="img"
+      aria-label={`Air Quality Index gauge showing AQI ${aqi}, categorized as ${category}`}
+    >
       <div className="relative" style={{ width: size, height: size * 0.65 }}>
         <svg
           width={size}

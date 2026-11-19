@@ -2,7 +2,7 @@ import React from 'react';
 import { AirQualityCombinedData } from '../../types/airQuality';
 import { AQIGauge } from '../ui/AQIGauge';
 import { getAQIExplanation, getAQIColor } from '../../utils/aqiUtils';
-import { ShieldAlert, ShieldCheck, Wind, AlertCircle, Clock, Info } from 'lucide-react';
+import { ShieldAlert, Wind, Clock, Info } from 'lucide-react';
 
 interface HeroAQICardProps {
   data: AirQualityCombinedData;

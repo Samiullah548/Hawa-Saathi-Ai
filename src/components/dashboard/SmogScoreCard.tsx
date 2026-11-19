@@ -6,11 +6,8 @@ import {
 import {
   ShieldCheck,
   CheckCircle2,
-  AlertCircle,
   ChevronDown,
   ChevronUp,
-  Sliders,
-  Sparkles,
 } from 'lucide-react';
 
 interface SmogScoreCardProps {

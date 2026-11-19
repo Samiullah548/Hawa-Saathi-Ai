@@ -1,48 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { AirQualityCombinedData } from '../types/airQuality';
 import { UserPreferences, HouseholdProfileType, ActivityType, TimeOfDay } from '../types/user';
 import { AISafetyRecommendation } from '../types/ai';
 import { fetchAISafetyRecommendations } from '../services/geminiClient';
+import { ACTIVITIES, PROFILES, TIME_SLOTS } from '../constants';
 import {
   Sparkles,
   ShieldCheck,
-  ShieldAlert,
   AlertTriangle,
   RefreshCw,
-  Wind,
-  Home,
   CheckCircle2,
   Clock,
   User,
   Activity,
   HeartHandshake,
   Info,
+  Wind,
+  Home,
 } from 'lucide-react';
 
 interface AISafetyPageProps {
   data: AirQualityCombinedData;
   preferences: UserPreferences;
 }
-
-const ACTIVITIES: ActivityType[] = [
-  'Morning Walk / Jog',
-  'Cycling',
-  'Outdoor Work / Labor',
-  'Office Commute',
-  'School / Playground',
-  'Indoor Fitness',
-  'General Errand',
-];
-
-const PROFILES: HouseholdProfileType[] = [
-  'General Adult',
-  'Child',
-  'Elderly Person',
-  'Sensitive Individual',
-  'Outdoor Worker',
-];
-
-const TIME_SLOTS: TimeOfDay[] = ['Morning', 'Afternoon', 'Evening', 'Night'];
 
 export const AISafetyPage: React.FC<AISafetyPageProps> = ({ data, preferences }) => {
   const [selectedActivity, setSelectedActivity] = useState<ActivityType>(
@@ -57,7 +37,7 @@ export const AISafetyPage: React.FC<AISafetyPageProps> = ({ data, preferences })
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const runAnalysis = async () => {
+  const runAnalysis = useCallback(async () => {
     setIsLoading(true);
     setError(null);
     try {
@@ -77,17 +57,29 @@ export const AISafetyPage: React.FC<AISafetyPageProps> = ({ data, preferences })
         preferences.customGeminiApiKey
       );
       setRecommendation(res);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Failed to generate safety recommendations:', err);
       setError('Unable to complete AI evaluation. Please verify connection.');
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [
+    data.current.aqi,
+    data.current.pm2_5,
+    data.current.pm10,
+    data.weather.temperature,
+    data.weather.humidity,
+    data.weather.windSpeed,
+    data.location.name,
+    selectedActivity,
+    selectedProfile,
+    selectedTimeOfDay,
+    preferences.customGeminiApiKey,
+  ]);
 
   useEffect(() => {
     runAnalysis();
-  }, [data.location.name, data.current.aqi, selectedActivity, selectedProfile, selectedTimeOfDay]);
+  }, [runAnalysis]);
 
   const getVerdictStyles = (verdict: AISafetyRecommendation['safetyVerdict']) => {
     switch (verdict) {

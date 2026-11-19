@@ -29,6 +29,14 @@ export interface SmogProtectionActions {
   monitorsDailyAQI: boolean;
 }
 
+/**
+ * Calculates a composite 0-100 Smog Survival Score based on ambient pollution stress (40 pts)
+ * combined with proven active mitigation measures (60 pts).
+ * 
+ * @param aqi - Real-time US Air Quality Index
+ * @param actions - User's protective measures (HEPA, N95, ventilation timing, exhaust, hydration, daily monitoring)
+ * @returns SmogScoreResult containing overall score, tier, itemized breakdown, and actionable suggestions
+ */
 export function calculateSmogSurvivalScore(
   aqi: number,
   actions: SmogProtectionActions

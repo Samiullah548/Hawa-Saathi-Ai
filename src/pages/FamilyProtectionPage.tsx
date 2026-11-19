@@ -12,13 +12,11 @@ import {
   Users,
   HardHat,
   AlertCircle,
-  Clock,
   CheckCircle2,
   Circle,
   Sun,
   Sunset,
   Moon,
-  Sparkles,
 } from 'lucide-react';
 
 interface FamilyProtectionPageProps {
@@ -31,7 +29,6 @@ export const FamilyProtectionPage: React.FC<FamilyProtectionPageProps> = ({ data
 
   const aqi = data.current.aqi;
   const isHighSmog = aqi > 150;
-  const isHazardous = aqi > 250;
 
   const toggleChecklist = (id: string) => {
     const updated = checklist.map((item) =>
@@ -294,22 +291,29 @@ export const FamilyProtectionPage: React.FC<FamilyProtectionPageProps> = ({ data
             <div
               key={item.id}
               onClick={() => toggleChecklist(item.id)}
-              className={`p-4 rounded-2xl border cursor-pointer transition flex items-start space-x-3.5 select-none ${
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  toggleChecklist(item.id);
+                }
+              }}
+              role="checkbox"
+              aria-checked={item.isCompleted}
+              tabIndex={0}
+              aria-label={`${item.title}: ${item.isCompleted ? 'Completed' : 'Not completed'}`}
+              className={`p-4 rounded-2xl border cursor-pointer transition flex items-start space-x-3.5 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 ${
                 item.isCompleted
                   ? 'bg-emerald-50/60 border-emerald-200 text-emerald-900'
                   : 'bg-white hover:bg-slate-50/80 border-slate-200 text-slate-700'
               }`}
             >
-              <button
-                type="button"
-                className="mt-0.5 text-emerald-600 focus:outline-none"
-              >
+              <span className="mt-0.5 text-emerald-600 flex-shrink-0" aria-hidden="true">
                 {item.isCompleted ? (
                   <CheckCircle2 className="w-5 h-5 text-emerald-600 fill-emerald-100" />
                 ) : (
                   <Circle className="w-5 h-5 text-slate-300" />
                 )}
-              </button>
+              </span>
 
               <div className="flex-1 space-y-1">
                 <div className="flex items-center justify-between">

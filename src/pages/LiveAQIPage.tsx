@@ -5,16 +5,11 @@ import { StatCard } from '../components/ui/StatCard';
 import { POLLUTANT_DEFINITIONS, getAQIExplanation, getAQIColor } from '../utils/aqiUtils';
 import {
   Wind,
-  ShieldAlert,
   Info,
-  Clock,
-  ExternalLink,
   ChevronDown,
   ChevronUp,
-  Activity,
   Heart,
   Eye,
-  AlertCircle,
   Database,
 } from 'lucide-react';
 

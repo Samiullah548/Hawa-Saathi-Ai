@@ -145,6 +145,7 @@ export const TopNav: React.FC<TopNavProps> = ({
                 </span>
                 <button
                   onClick={() => onToggleFavorite(currentCity)}
+                  aria-label={isCurrentFavorite ? `Remove ${currentCity.name} from favorites` : `Save ${currentCity.name} to favorites`}
                   title={isCurrentFavorite ? 'Remove from favorites' : 'Save to favorites'}
                   className={`p-1 rounded-md transition ${
                     isCurrentFavorite
@@ -175,6 +176,7 @@ export const TopNav: React.FC<TopNavProps> = ({
               }}
               onFocus={() => setIsOpen(true)}
               placeholder="Search Indian cities (Delhi, Meerut, Mumbai...)"
+              aria-label="Search Indian cities by name"
               className="w-full pl-10 pr-10 py-2 text-sm bg-slate-100/80 hover:bg-slate-100 focus:bg-white rounded-2xl border border-transparent focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition"
             />
             {isSearching && (
@@ -285,7 +287,8 @@ export const TopNav: React.FC<TopNavProps> = ({
             onClick={onRefresh}
             disabled={isLoading}
             title="Refresh Air Quality Data"
-            className="p-2 md:px-3 md:py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold flex items-center space-x-1.5 transition"
+            aria-label="Refresh air quality data"
+            className="p-2 md:px-3 md:py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold flex items-center space-x-1.5 transition focus-visible:ring-2 focus-visible:ring-emerald-500"
           >
             <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin text-emerald-600' : ''}`} />
             <span className="hidden md:inline">Refresh</span>
@@ -295,7 +298,8 @@ export const TopNav: React.FC<TopNavProps> = ({
           <button
             onClick={onOpenShareModal}
             title="Share Awareness Card"
-            className="p-2 md:px-3 md:py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-semibold flex items-center space-x-1.5 transition border border-emerald-200"
+            aria-label="Share air quality card to social media"
+            className="p-2 md:px-3 md:py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-semibold flex items-center space-x-1.5 transition border border-emerald-200 focus-visible:ring-2 focus-visible:ring-emerald-500"
           >
             <Share2 className="w-4 h-4 text-emerald-600" />
             <span className="hidden md:inline">Share Card</span>
@@ -305,7 +309,8 @@ export const TopNav: React.FC<TopNavProps> = ({
           <button
             onClick={onToggleNotifications}
             title={notificationsEnabled ? 'AQI Alerts Enabled' : 'Enable AQI Alerts'}
-            className={`p-2 rounded-xl transition ${
+            aria-label={notificationsEnabled ? 'AQI alerts enabled, click to disable' : 'Click to enable high AQI desktop notifications'}
+            className={`p-2 rounded-xl transition focus-visible:ring-2 focus-visible:ring-emerald-500 ${
               notificationsEnabled
                 ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200'
                 : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
